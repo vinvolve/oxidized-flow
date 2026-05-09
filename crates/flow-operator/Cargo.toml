@@ -1,0 +1,12 @@
+[package]
+name = "flow-operator"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+flow-types = { path = "../flow-types" }
+k8s-openapi = { workspace = true, features = ["v1_29"] } # Make sure this says v1_29
+kube = { workspace = true }
+tokio = { workspace = true }
+anyhow = { workspace = true }
+tracing = { workspace = true }

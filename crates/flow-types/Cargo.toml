@@ -1,0 +1,13 @@
+[package]
+name = "flow-types"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+k8s-openapi = { workspace = true }
+kube = { workspace = true }
+serde = { workspace = true }
+schemars = { workspace = true }
+
+[dev-dependencies]
+k8s-openapi = { workspace = true, features = ["v1_29"] }
