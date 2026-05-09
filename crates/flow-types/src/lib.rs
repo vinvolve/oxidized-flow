@@ -25,3 +25,12 @@ pub struct PipelineStatus {
     pub state: String,
     pub current_step: Option<String>,
 }
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn test_hello_world() {
+        println!("Hello, CI!");
+        assert_eq!(2 + 2, 4);
+    }
+}

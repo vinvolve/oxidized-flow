@@ -1,20 +1,23 @@
 use flow_types::Pipeline;
 use futures::StreamExt;
 use kube::{
-    api::Api,
-    runtime::{controller::Action, watcher::Config, Controller},
     Client, ResourceExt,
+    api::Api,
+    runtime::{Controller, controller::Action, watcher::Config},
 };
 use std::sync::Arc;
 use tokio::time::Duration;
 
 struct ContextData {
+    #[allow(dead_code)]
     client: Client,
 }
 
 async fn reconcile(pipeline: Arc<Pipeline>, _ctx: Arc<ContextData>) -> Result<Action, kube::Error> {
     let name = pipeline.name_any();
-    let namespace = pipeline.namespace().unwrap_or_else(|| "default".to_string());
+    let namespace = pipeline
+        .namespace()
+        .unwrap_or_else(|| "default".to_string());
 
     println!("Detected Pipeline event: {}/{}", namespace, name);
 
