@@ -1,14 +1,27 @@
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
+use kube::CustomResource;
+use schemars::JsonSchema;
+use serde::{Deserialize, Serialize};
+
+#[derive(CustomResource, Deserialize, Serialize, Clone, Debug, JsonSchema)]
+#[kube(
+    group = "rustflow.org",
+    version = "v1",
+    kind = "Pipeline",
+    status = "PipelineStatus",
+    namespaced
+)]
+pub struct PipelineSpec {
+    pub steps: Vec<Step>,
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+#[derive(Deserialize, Serialize, Clone, Debug, JsonSchema)]
+pub struct Step {
+    pub name: String,
+    pub image: String,
+}
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
+#[derive(Deserialize, Serialize, Clone, Debug, Default, JsonSchema)]
+pub struct PipelineStatus {
+    pub state: String,
+    pub current_step: Option<String>,
 }

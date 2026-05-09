@@ -10,3 +10,5 @@ kube = { workspace = true }
 tokio = { workspace = true }
 anyhow = { workspace = true }
 tracing = { workspace = true }
+serde_yaml = "0.9"
+futures = "0.3"
